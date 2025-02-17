@@ -10,9 +10,10 @@ import (
 var DEF_DATABASE_URL = "mysql://root:password@tcp(localhost:3306)/fiber_template"
 
 type Config struct {
-	Host          string // localhost:1221
-	DatabaseUrl   string // mysql://root:password@localhost:3306/fiber_template
-	DbConnRetries int    // 5
+	Host          string   // localhost:1221
+	DatabaseUrl   string   // mysql://root:password@localhost:3306/fiber_template
+	DbConnRetries int      // 5
+	LogLevel      LogLevel // 0
 }
 
 func LookupOrDefault(key string, def string) string {
@@ -40,5 +41,6 @@ func NewConfig() *Config {
 		Host:          LookupOrDefault("HOST", "localhost:1221"),
 		DatabaseUrl:   LookupOrDefault("DATABASE_URL", DEF_DATABASE_URL),
 		DbConnRetries: LookupOrDefaultInt("DB_CONN_RETRIES", 5),
+		LogLevel:      LogLevel(LookupOrDefaultInt("LOG_LEVEL", 0)),
 	}
 }
